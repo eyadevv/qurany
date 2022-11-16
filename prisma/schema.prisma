@@ -7,12 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Surah {
+model user {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+}
+
+model surah {
   name     String
   id       Int    @id @default(autoincrement())
   ayahs    Int
-  place    String
   qariId   Int
+  place    String
   qariName String
   qari     qari   @relation(fields: [qariId, qariName], references: [id, name])
 }
@@ -23,7 +30,7 @@ model qari {
   image       String
   surahsCount Int
   country     String
-  surahs      Surah[]
+  surahs      surah[]
 
   @@unique([id, name])
 }

@@ -4,14 +4,13 @@ function MyApp({ Component, pageProps }) {
   switch (Component.name) {
     case "Home":
       return <Component {...pageProps} />;
-      break;
     default:
       return (
         <Layout>
           <Component {...pageProps} />
+          {console.log(Component.name)}
         </Layout>
       );
-      break;
   }
 }
 

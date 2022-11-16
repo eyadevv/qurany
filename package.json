@@ -2,6 +2,7 @@
   "name": "qurany",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "4.6.1",
+    "@prisma/client": "^4.6.1",
     "autoprefixer": "^10.4.13",
     "bcrypt": "^5.1.0",
     "eslint": "8.27.0",

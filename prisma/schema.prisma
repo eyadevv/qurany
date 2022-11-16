@@ -8,24 +8,22 @@ datasource db {
 }
 
 model Surah {
-  name        String
-  id          Int      @id @default(autoincrement())
-  ayahs       Int
-  pages       Int
-  type        String
-  url         String
-  englishName String
-  qari qari @relation(fields: [qariId], references: [id])
-  qariId Int
+  name     String
+  id       Int    @id @default(autoincrement())
+  ayahs    Int
+  place    String
+  qariId   Int
+  qariName String
+  qari     qari   @relation(fields: [qariId, qariName], references: [id, name])
 }
-model qari{
-  id          Int      @id @default(autoincrement())
+
+model qari {
+  id          Int     @id @default(autoincrement())
   name        String
   image       String
   surahsCount Int
+  country     String
   surahs      Surah[]
-  country String
-  imgurl String
 
-
+  @@unique([id, name])
 }

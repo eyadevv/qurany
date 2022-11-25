@@ -9,3 +9,11 @@ h1 {
   font-size: xx-large;
   font-weight: 700;
 }
+input {
+  border: 2px solid blue;
+  padding: 0.7rem;
+  border-radius: 10px;
+}
+input:focus {
+  outline: black;
+}

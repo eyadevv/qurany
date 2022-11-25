@@ -11,14 +11,14 @@ export default async function handle(
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   } else {
-    const { name, email, password } = req.body;
+    const { username, email, password, repeatedpassword } = req.body;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     let USER;
     try {
       USER = await prisma.user.create({
         data: {
-          name,
+          name: username,
           email,
           password: hashedPassword,
         },
@@ -41,7 +41,8 @@ export default async function handle(
         path: "/",
       })
     );
-    res.status(200).json({ message: "Success" });
+    res.status(200).json({ message: "Success", body: USER });
+
     console.log("new user is created");
   }
 }

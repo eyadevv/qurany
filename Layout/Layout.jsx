@@ -1,6 +1,8 @@
 import Side from "../Components/Side";
 import Player from "../Components/Player";
+
 const Layout = ({ children }) => {
+
   return (
     <main className="w-screen h-max bg-black text-white flex flex-row phone:flex-col ">
       <Side />

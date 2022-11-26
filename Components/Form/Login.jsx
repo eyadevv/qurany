@@ -8,6 +8,7 @@ const Login = ({ setmode }) => {
   const [passerror, setpasserror] = useState(false);
   const [isloading, setisloading] = useState(false);
   const [redirect, setredirect] = useState(false);
+  const [msg, setmsg] = useState(null);
   console.log(email, password);
   const handlePass = (pass) => {
     if (pass.length <= 8) {
@@ -41,13 +42,14 @@ const Login = ({ setmode }) => {
         onChange={(e) => handlePass(e.target.value)}
         helperText={passerror ? "Password must be 8 characters long" : ""}
       />
-      <button onClick={() => Poster("login", data, setisloading, setredirect)}>
+      <button onClick={() => Poster("login", data, setisloading, setredirect , setmsg)}>
         Login
       </button>
       <button onClick={() => setmode("Register")}>
         Don't have an account?
       </button>
       {isloading ? <CircularProgress /> : null}
+      {msg}
     </section>
   );
 };

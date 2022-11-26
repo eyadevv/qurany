@@ -1,29 +1,23 @@
 import axios from "axios";
 
-export const Poster = async (mode, data, isloding, redirect) => {
+export const Poster = async (mode, data, isloding, redirect, setmsg) => {
   const url = `/api/${mode}`;
   isloding(true);
   await axios
     .post(url, data)
     .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
+      console.log("res :", res);
       isloding(false);
       redirect(true);
+      setmsg("redirecting...");
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        setmsg("invalid credentials");
+      } else {
+        setmsg("there was an error on our side");
+      }
+      isloding(false);
     });
 };
 
-export const Getter = async (url) => {
-  await axios
-    .get(url)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};

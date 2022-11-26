@@ -1,9 +1,13 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, CircularProgress } from "@mui/material";
 import { useState } from "react";
+import { Poster } from "../../lib/loader";
+import { useRouter } from "next/router";
 const Login = ({ setmode }) => {
   const [password, setpassword] = useState(null);
   const [email, setemail] = useState(null);
   const [passerror, setpasserror] = useState(false);
+  const [isloading, setisloading] = useState(false);
+  const [redirect, setredirect] = useState(false);
   console.log(email, password);
   const handlePass = (pass) => {
     if (pass.length <= 8) {
@@ -13,22 +17,12 @@ const Login = ({ setmode }) => {
       setpassword(pass);
     }
   };
-  const handleSubmit = async () => {
-    await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
+  const data = { email, password };
+  redirect ? useRouter().push("/app") : null;
+
   return (
     <section className="flex flex-col gap-4 items-center">
+      <h1>Welcome back</h1>
       <TextField
         id="outlined-basic"
         label="Email or Username"
@@ -47,10 +41,13 @@ const Login = ({ setmode }) => {
         onChange={(e) => handlePass(e.target.value)}
         helperText={passerror ? "Password must be 8 characters long" : ""}
       />
-      <button onClick={() => handleSubmit()}>Login</button>
+      <button onClick={() => Poster("login", data, setisloading, setredirect)}>
+        Login
+      </button>
       <button onClick={() => setmode("Register")}>
         Don't have an account?
       </button>
+      {isloading ? <CircularProgress /> : null}
     </section>
   );
 };

@@ -1,5 +1,7 @@
-import { TextField } from "@mui/material";
+import { TextField, CircularProgress } from "@mui/material";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { Poster } from "../../lib/loader";
 const Register = ({ setmode }) => {
   const [pass, setpass] = useState(null);
   const [passerror, setpasserror] = useState(false);
@@ -7,6 +9,8 @@ const Register = ({ setmode }) => {
   const [repasserror, setrepasserror] = useState(false);
   const [email, setemail] = useState(null);
   const [user, setuser] = useState(null);
+  const [isloading, setisloading] = useState(false);
+  const [redirect, setredirect] = useState(false);
   const handlePass = (pass) => {
     if (pass.length <= 8) {
       setpasserror(true);
@@ -24,22 +28,10 @@ const Register = ({ setmode }) => {
     }
   };
   const data = { user, email, pass, repass };
-  console.log(data);
-
-  const handleSubmit = async () => {
-    await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
+  redirect ? useRouter().push("/app") : null;
   return (
     <section className="flex flex-col justify-center items-center gap-4 ">
+      <h1>Welcome</h1>
       <TextField
         variant="outlined"
         label="username"
@@ -76,8 +68,13 @@ const Register = ({ setmode }) => {
         onChange={(e) => handleRepass(e.target.value)}
         helperText={repasserror ? "Passwords don't match" : ""}
       />
-      <button onClick={() => handleSubmit()}>Register</button>
+      <button
+        onClick={() => Poster("register", data, setisloading, setredirect)}
+      >
+        Register
+      </button>
       <button onClick={() => setmode("login")}>Already have an account</button>
+      {isloading === true ? <CircularProgress color="success" /> : null}
     </section>
   );
 };

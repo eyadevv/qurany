@@ -13,10 +13,10 @@ export default async function handle(
   } else {
     console.log(req.body);
 
-    const { user, password } = req.body;
+    const { email, password } = req.body;
     const USER = await prisma.user.findUnique({
       where: {
-        email: user,
+        email,
       },
     });
     if (USER && bcrypt.compareSync(password, USER.password)) {
@@ -32,15 +32,17 @@ export default async function handle(
       );
       res.setHeader(
         "Set-Cookie",
-        cookie.serialize("auth token", token, {
+        cookie.serialize("auth", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV !== "development",
           sameSite: "strict",
           maxAge: 60 * 60 * 24,
           path: "/",
+          email: USER.email,
         })
       );
       res.status(200).json({ message: "Login succefully", body: USER });
+      console.log("login succefully");
     } else {
       res.status(401).json({ error: "invalid email or password" });
     }

@@ -1,3 +1,4 @@
+
 const Player = () => {
   return (
     <div className="w-11/12 h-32 bg-red-700 rounded-xl flex flex-row justify-start items-center ml-4  ">

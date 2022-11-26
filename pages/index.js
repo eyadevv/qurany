@@ -1,5 +1,4 @@
 import Head from "next/head";
-
 export default function Home() {
   return (
     <div>
@@ -10,6 +9,7 @@ export default function Home() {
       </Head>
       <section>
         <h1>Main page</h1>
+        <a href="/welcome">JOin Now</a>
       </section>
     </div>
   );

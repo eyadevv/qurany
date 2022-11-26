@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 export default function Home() {
   return (
     <div>
@@ -9,7 +10,8 @@ export default function Home() {
       </Head>
       <section>
         <h1>Main page</h1>
-        <a href="/welcome">JOin Now</a>
+        <Link href='/welcome' >Login</Link>
+
       </section>
     </div>
   );

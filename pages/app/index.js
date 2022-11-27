@@ -22,7 +22,6 @@ const app = () => {
   if (isSuccess) {
     return (
       <main className="max-w-full">
-        <h1>Salam !</h1>
         <div className="max-w-[80vw] h-36 flex flex-row justify-start items-center overflow-scroll gap-4 rounded-xl">
           {data.map((qari, id) => {
             return <h1 key={id}>{qari.name}</h1>;

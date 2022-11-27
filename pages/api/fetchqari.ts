@@ -1,21 +1,23 @@
 import validateRoute from "../../lib/auth";
 import prisma from "../../lib/prisma";
-export default validateRoute(async function handle(req, res) {
+
+export default validateRoute(async function handler(req, res) {
+  const id = req.body.qariId;
+  console.log(id);
+
   try {
     await prisma.qari
       .findUnique({
         where: {
-          id: req.body.qariId,
+          id: Number(id),
         },
       })
       .then((data) => {
         res.status(200).json(data);
       })
       .catch((err) => {
+        res.status(404).json("NO Qari Found");
         console.log(err);
-        res
-          .status(404)
-          .json({ message: "Empty DataBase Try again after seeding" });
       });
   } catch (error) {
     console.log(error);

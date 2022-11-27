@@ -1,36 +1,34 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  username  String    @unique
-  password  String
+generator client {
+  provider = "prisma-client-js"
 }
 
-model surah {
-  name     String
-  id       Int    @id @default(autoincrement())
-  ayahs    Int
-  qariId   Int
-  place    String
-  qariName String
-  qari     qari   @relation(fields: [qariId, qariName], references: [id, name])
+model Surah {
+  id        Int @id @default(autoincrement())
+  name      String
+  arabicName String
+  place     String
+  ayahs     Int
+  qari    Qari  @relation(fields: [qariId], references: [id])
+  qariId  Int
 }
 
-model qari {
-  id          Int     @id @default(autoincrement())
-  name        String
-  image       String
-  surahsCount Int
-  country     String
-  surahs      surah[]
-
-  @@unique([id, name])
+model Qari {
+  id    Int     @id @default(autoincrement())
+  name String  @unique
+  arabicName  String
+  image String
+  country String
+  surahs Surah[]
+}
+model User {
+  id    Int     @id @default(autoincrement())
+  name String  @unique
+  email String @unique
+  password String
+  role String @default("USER")
 }

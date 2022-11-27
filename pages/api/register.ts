@@ -18,9 +18,10 @@ export default async function handle(
     try {
       USER = await prisma.user.create({
         data: {
-          username: user,
+          name: user,
           email,
           password: hashedPassword,
+          role: "user",
         },
       });
     } catch (error) {
@@ -40,7 +41,6 @@ export default async function handle(
         maxAge: 60 * 60 * 24, // 1 day
         path: "/",
         email: USER.email,
-
       })
     );
     res.status(200).json({ message: "Success", body: USER });

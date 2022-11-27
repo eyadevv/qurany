@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { AiFillHome, AiOutlineOrderedList } from "react-icons/ai";
 import { MdLeaderboard } from "react-icons/md";
-import { useState } from "react";
 const Item = ({ content, route, icon }) => {
   return (
     <Link
@@ -16,7 +15,7 @@ const Item = ({ content, route, icon }) => {
 };
 const Side = () => {
   return (
-    <section className="w-44 h-screen bg-red-700 flex flex-col justify-baseline items-center pt-8 font-bold overflow-x-clip overflow-y-auto phone:flex-row phone:w-full phone:h-24 phone:text-center phone:p-0 phone:text-sm">
+    <section className="w-44 h-screen bg-black flex flex-col justify-baseline items-center pt-8 font-bold overflow-x-clip overflow-y-auto phone:flex-row phone:w-full phone:h-24 phone:text-center phone:p-0 phone:text-sm">
       <Item content="home" route="/app/" icon=<AiFillHome /> />
       <Item
         content="Playlist"

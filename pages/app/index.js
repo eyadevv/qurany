@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { CircularProgress } from "@mui/material";
-import Image from "next/image";
 const App = () => {
   const query = useQuery(["/app"], () => {
     return fetch("/api/qari", {

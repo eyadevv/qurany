@@ -8,10 +8,10 @@ const Layout = ({ children }) => {
   const value = { player, setplayer };
   return (
     <PlayerContext.Provider value={value}>
-      <main className="w-screen h-max bg-black text-white flex flex-row phone:flex-col ">
+      <main className="w-screen h-screen bg-black text-white flex flex-row phone:flex-col ">
         <Side />
         <section className="w-full h-screen flex flex-col justify-between items-start bg-gradient-to-b from-red-700 to-black">
-          <div className="w-full h-5/6  rounded-xl  ">{children}</div>
+          <div className="w-full h-full  rounded-xl  ">{children}</div>
           {player ? <Player /> : null}
         </section>
       </main>

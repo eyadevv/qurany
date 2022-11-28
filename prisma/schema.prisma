@@ -8,14 +8,15 @@ generator client {
 }
 
 model Surah {
-  id        Int @id @default(autoincrement())
+  uuid  Int  @id @default(autoincrement())
+  id        Int
   name      String
   arabicName String
   place     String
   ayahs     Int
   qari    Qari  @relation(fields: [qariId], references: [id])
   qariId  Int
-  qariName String 
+  qariName String
 }
 
 model Qari {

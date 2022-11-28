@@ -20,7 +20,7 @@ const Item = ({ content, route, icon }) => {
 const Side = () => {
   return (
     <section className="w-44 h-screen bg-black flex flex-col justify-between items-center pt-8 font-bold overflow-x-clip overflow-y-auto phone:flex-row phone:w-full phone:h-24 phone:text-center phone:p-0 phone:text-sm">
-      <div className="w-11/12 flex justify-center items-center flex-col">
+      <div className="w-11/12 h-full flex justify-center items-center flex-col phone:flex-row phone:h-8">
         <Item content="home" route="/app/" icon={<AiFillHome />} />
         <Item
           content="Playlist"

@@ -15,6 +15,7 @@ model Surah {
   ayahs     Int
   qari    Qari  @relation(fields: [qariId], references: [id])
   qariId  Int
+  qariName String 
 }
 
 model Qari {

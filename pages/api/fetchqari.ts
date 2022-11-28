@@ -3,8 +3,6 @@ import prisma from "../../lib/prisma";
 
 export default validateRoute(async function handler(req, res) {
   const id = req.body.qariId;
-  console.log(id);
-
   try {
     await prisma.qari
       .findUnique({
@@ -12,12 +10,15 @@ export default validateRoute(async function handler(req, res) {
           id: Number(id),
         },
       })
-      .then((data) => {
-        res.status(200).json(data);
+      .then((qari) => {
+        if (qari) {
+          res.status(200).json(qari);
+        } else {
+          res.status(404).json({ message: "Qari not found" });
+        }
       })
       .catch((err) => {
-        res.status(404).json("NO Qari Found");
-        console.log(err);
+        throw new Error(err);
       });
   } catch (error) {
     console.log(error);

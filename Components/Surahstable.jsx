@@ -1,10 +1,8 @@
 import {
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Table,
 } from "@mui/material";
 const Surahstable = ({ surahs }) => {

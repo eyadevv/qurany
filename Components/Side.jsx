@@ -9,7 +9,7 @@ const Item = ({ content, route, icon }) => {
   return (
     <Link
       href={route}
-      className={`  w-full h-16 rounded-lg  hover:bg-red-600 hover:cursor-pointer flex justify-center items-center m-1 p-2 gap-2 phone:p-1 flex-wrap-reverse`}
+      className={`  w-full h-16 rounded-lg  hover:bg-red-600 hover:cursor-pointer flex justify-center items-center m-1 p-2 gap-2 phone:p-1 phone:flex-nowrap flex-wrap-reverse`}
     >
       {icon}
 

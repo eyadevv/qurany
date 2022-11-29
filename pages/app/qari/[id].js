@@ -35,7 +35,7 @@ const Qari = () => {
     { enabled: availableId }
   );
   return (
-    <div className="max-w-full max-h-full ">
+    <div className="w-full h-full overflow-scroll ">
       {qari.isLoading ? (
         <Usernav name="loading" country="" />
       ) : (

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 const Surahstable = ({ surahs }) => {
   return (
-    <div className="w-full h-[70vh] overflow-scroll text-white gap-2 mt-4">
+    <div className="w-full h-full overflow-scroll text-white gap-2 mt-2">
       <Table
         sx={{
           color: "white",

@@ -4,16 +4,14 @@ import PlayerContext from "../Context/PlayerConext";
 import { useState } from "react";
 
 const Layout = ({ children }) => {
-  const [player, setplayer] = useState(false);
+  const [player, setplayer] = useState(true);
   const value = { player, setplayer };
   return (
     <PlayerContext.Provider value={value}>
       <main className="w-screen h-screen bg-black text-white flex flex-row phone:flex-col phone:h-max ">
         <Side />
-        <section className="w-full h-screen flex flex-col justify-between items-start bg-gradient-to-b from-red-800 to-black phone:h-max">
-          <div className="w-full h-full  rounded-xl  phone:h-max phone:overflow-scroll">
-            {children}
-          </div>
+        <section className="w-full h-screen flex flex-col justify-between items-center bg-gradient-to-b from-red-800 to-black">
+          <div className="w-full max-h-[80vh] rounded-xl ">{children}</div>
           {player ? <Player /> : null}
         </section>
       </main>

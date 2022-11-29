@@ -30,7 +30,7 @@ const Side = () => {
         <Item content="Board" route="/app/board" icon={<MdLeaderboard />} />
         <Item content="Qari" route="/app/qari" icon={<AiOutlineUser />} />
       </div>
-      <div className="w-16 h-16 rounded-full bg-white"></div>
+      <div className="w-16 h-16 rounded-full bg-white phone:hidden"></div>
     </section>
   );
 };

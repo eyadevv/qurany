@@ -1,7 +1,7 @@
 import Image from "next/image";
 const Usernav = ({ imageurl, name, country }) => {
   return (
-    <div className="w-full h-max flex flex-row justify-start items-center p-4 gap-2">
+    <div className="w-full h-max flex flex-row justify-start items-center p-4 gap-2 sticky">
       {imageurl ? (
         <Image src={imageurl} alt={name} width="150" height="150" />
       ) : null}

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 const Index = () => {
   const query = useQuery(["/app"], () => {
     return fetch("/api/qari").then((res) => res.json());
@@ -14,7 +15,11 @@ const Index = () => {
     return (
       <div>
         {data.map((qari, id) => {
-          return <h1 key={id}>{qari.name}</h1>;
+          return (
+            <Link href={`/app/qari/${qari.id}`}>
+              <h1 key={id}>{qari.name}</h1>
+            </Link>
+          );
         })}
       </div>
     );

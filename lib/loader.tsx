@@ -20,4 +20,3 @@ export const Poster = async (mode, data, isloding, redirect, setmsg) => {
       isloding(false);
     });
 };
-

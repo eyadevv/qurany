@@ -1,7 +1,7 @@
 const board = () => {
   return (
-    <section>
-      <h1>Hi There</h1>
+    <section className="w-full h-full flex justify-center items-center">
+      <h1>Not Enough data to analyze</h1>
     </section>
   );
 };

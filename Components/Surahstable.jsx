@@ -5,9 +5,12 @@ import {
   TableRow,
   Table,
 } from "@mui/material";
+import { useContext } from "react";
+import { PlayerContext } from "../context/PlayerContext";
 const Surahstable = ({ surahs }) => {
+  const { dispatch } = useContext(PlayerContext);
   return (
-    <div className="w-full h-full overflow-scroll text-white gap-2 mt-2">
+    <div className="w-full">
       <Table
         sx={{
           color: "white",
@@ -22,11 +25,22 @@ const Surahstable = ({ surahs }) => {
             <TableCell sx={{ color: "white" }}>type</TableCell>
           </TableRow>
         </TableHead>
-        {surahs.map((surah, key) => {
-          const { id, name, ayahs, place } = surah;
-          return (
-            <TableBody key={key}>
-              <TableRow>
+        <TableBody>
+          {surahs.map((surah, key) => {
+            const { id, name, ayahs, place } = surah;
+            return (
+              <TableRow
+                key={key}
+                onClick={() =>
+                  dispatch({
+                    type: "SETCURRENT",
+                    payload: {
+                      id,
+                      name,
+                    },
+                  })
+                }
+              >
                 <TableCell sx={{ color: "white", border: "none" }}>
                   {id}
                 </TableCell>
@@ -40,31 +54,11 @@ const Surahstable = ({ surahs }) => {
                   {place}
                 </TableCell>
               </TableRow>
-            </TableBody>
-          );
-        })}
+            );
+          })}
+        </TableBody>
       </Table>
     </div>
   );
 };
 export default Surahstable;
-{
-  /* <Table>
-<TableHead>
-  <TableRow>
-    <TableCell>id</TableCell>
-    <TableCell>Name</TableCell>
-    <TableCell>Ayat</TableCell>
-    <TableCell>PLace</TableCell>
-  </TableRow>
-</TableHead>
-<TableBody>
-  <TableRow>
-    <TableCell>1</TableCell>
-    <TableCell>Abdul Basit</TableCell>
-    <TableCell>6236</TableCell>
-    <TableCell>Makkah</TableCell>
-  </TableRow>
-</TableBody>
-</Table> */
-}

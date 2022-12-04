@@ -15,7 +15,9 @@ export default validateRoute(async (req, res) => {
         res.json(surahs);
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        console.log("there was an error", err.code);
+
+        res.status(500).json({ error: "there was an error" });
       });
   } catch (error) {
     console.log(error);

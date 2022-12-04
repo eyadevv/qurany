@@ -17,11 +17,11 @@ export default function validateRoute(handler) {
           })
           .catch((err) => {
             console.log(err);
-            res.status(401).json({ message: "User not found" });
+            res.status(500).json({ message: "there was an error" });
           });
       } catch (error) {
         console.error(error);
-        res.status(401).json({ message: "expired token " });
+        res.status(401).json({ message: "expired token" });
       }
       return handler(req, res, USER);
     } else {

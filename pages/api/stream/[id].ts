@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import AWS from "aws-sdk";
-const S3 = new AWS.S3({
+const BUCKET = new AWS.S3({
   region: process.env.AWS_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -13,18 +13,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // const files = await S3.listObjectsV2({
-    //   Bucket: process.env.BUCKET,
-    // }).promise();
-    // res.status(200).json({ files });
-
-    // delete all files in bucket
-    const files = await S3.listObjectsV2({
-      Bucket: process.env.BUCKET,
-    }).promise();
-
-    res.status(200).json({ files });
-  } catch (error) {
-    console.log(error);
+    const params = {
+      Bucket: process.env.AWS_BUCKET,
+      Key: "./stream/1-1.mp3",
+    };
+    const s3Stream = BUCKET.getObject(params);
+    res.status(200).setHeader("Content-Type", "audio/mpeg");
+    s3Stream.createReadStream().pipe(res);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: "Not found" });
   }
 }

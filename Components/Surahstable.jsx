@@ -5,10 +5,14 @@ import {
   TableRow,
   Table,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 const Surahstable = ({ surahs }) => {
-  const { dispatch } = useContext(PlayerContext);
+  const { setactive, setsurahslist } = useContext(PlayerContext);
+  useEffect(() => {
+    setsurahslist(() => surahs);
+  }, []);
+
   return (
     <div className="w-full">
       <Table
@@ -29,18 +33,7 @@ const Surahstable = ({ surahs }) => {
           {surahs.map((surah, key) => {
             const { id, name, ayahs, place } = surah;
             return (
-              <TableRow
-                key={key}
-                onClick={() =>
-                  dispatch({
-                    type: "SETCURRENT",
-                    payload: {
-                      id,
-                      name,
-                    },
-                  })
-                }
-              >
+              <TableRow key={key} onClick={() => setactive(() => id)}>
                 <TableCell sx={{ color: "white", border: "none" }}>
                   {id}
                 </TableCell>

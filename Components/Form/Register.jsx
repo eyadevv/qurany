@@ -9,6 +9,7 @@ const Register = ({ setmode }) => {
   const [repasserror, setrepasserror] = useState(false);
   const [email, setemail] = useState(null);
   const [user, setuser] = useState(null);
+  const [msg, setmsg] = useState(null);
   const [isloading, setisloading] = useState(false);
   const [redirect, setredirect] = useState(false);
   const handlePass = (pass) => {
@@ -69,8 +70,11 @@ const Register = ({ setmode }) => {
           onChange={(e) => handleRepass(e.target.value)}
           helperText={repasserror ? "Passwords don't match" : ""}
         />
+        {msg}
         <button
-          onClick={() => Poster("register", data, setisloading, setredirect)}
+          onClick={() =>
+            Poster("register", data, setisloading, setredirect, setmsg)
+          }
         >
           Register
         </button>

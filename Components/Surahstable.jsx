@@ -25,13 +25,14 @@ const Surahstable = ({ surahs }) => {
           <TableRow>
             <TableCell sx={{ color: "white" }}>id</TableCell>
             <TableCell sx={{ color: "white" }}>Name</TableCell>
-            <TableCell sx={{ color: "white" }}>ayat</TableCell>
-            <TableCell sx={{ color: "white" }}>type</TableCell>
+            <TableCell sx={{ color: "white" }}>ArabicName</TableCell>
+            <TableCell sx={{ color: "white" }}>Ayahs</TableCell>
+            <TableCell sx={{ color: "white" }}>Type</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {surahs.map((surah, key) => {
-            const { id, name, ayahs, place } = surah;
+            const { id, name, ayahs, place, arabicName } = surah;
             return (
               <TableRow key={key} onClick={() => setactive(() => id)}>
                 <TableCell sx={{ color: "white", border: "none" }}>
@@ -39,6 +40,11 @@ const Surahstable = ({ surahs }) => {
                 </TableCell>
                 <TableCell sx={{ color: "white", border: "none" }}>
                   {name}
+                </TableCell>
+                <TableCell
+                  sx={{ color: "white", border: "none", direction: "rtl" }}
+                >
+                  {arabicName}
                 </TableCell>
                 <TableCell sx={{ color: "white", border: "none" }}>
                   {ayahs}

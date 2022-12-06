@@ -9,7 +9,6 @@ const Login = ({ setmode }) => {
   const [isloading, setisloading] = useState(false);
   const [redirect, setredirect] = useState(false);
   const [msg, setmsg] = useState(null);
-  console.log(email, password);
   const handlePass = (pass) => {
     if (pass.length <= 8) {
       setpasserror(true);

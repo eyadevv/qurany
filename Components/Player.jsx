@@ -1,118 +1,168 @@
+import ReactHowler from "react-howler";
+import { useState, useRef, useEffect, useContext } from "react";
 import {
-  MdPauseCircle,
-  MdArrowForward,
-  MdArrowBack,
-  MdPlayArrow,
-  MdShuffle,
-  MdShuffleOn,
+  MdPlayCircleFilled,
+  MdPauseCircleFilled,
+  MdSkipNext,
+  MdSkipPrevious,
   MdRepeat,
   MdRepeatOne,
-  MdReplyAll,
+  MdShuffle,
+  MdHeadphones,
 } from "react-icons/md";
-import ReactHowler from "react-howler";
-import { useState, useContext, useRef } from "react";
+
+import {
+  RangeSlider,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  ChakraProvider,
+} from "@chakra-ui/react";
 import { PlayerContext } from "../context/PlayerContext";
-import { useEffect } from "react";
 const Player = () => {
-  const { surahslist, active, setactive } = useContext(PlayerContext);
-  const [isplaying, setisplaying] = useState(false);
-  const [repeat, setrepeat] = useState(false);
-  const [shuffle, setshuffle] = useState(false);
-  const [duration, setduration] = useState(0);
+  const SoundRef = useRef(null);
+  const [playing, setplaying] = useState(false);
   const [seek, setseek] = useState(0);
-  const [isseeking, setisseeking] = useState(false);
-  const soundRef = useRef(null);
-  const url = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${active}.mp3`;
+  const [duration, setduration] = useState(0);
+  const [shuffle, setshuffle] = useState(false);
+  const [repeat, setrepeat] = useState(false);
+  const [seeking, setseeking] = useState(false);
+  const { active, setactive, surahslist } = useContext(PlayerContext);
+  useEffect(() => {
+    let id;
+    if (playing && !seeking && SoundRef.current) {
+      const animate = () => {
+        setseek(SoundRef.current.seek());
+        id = requestAnimationFrame(animate);
+      };
+      id = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(id);
+    }
+    cancelAnimationFrame(id);
+  }, [playing, seeking]);
 
   const handleseek = (e) => {
-    setseek(() => e.target.value);
-    soundRef.current.seek(e.target.value);
-    setisseeking(() => false);
+    setseek(e[0]);
+    SoundRef.current.seek(e[0]);
   };
-  useEffect(() => {
-    let Timeid;
-    if (isplaying && !isseeking) {
-      const update = () => {
-        setseek(() => soundRef.current.seek());
-        Timeid = requestAnimationFrame(update);
-      };
-      Timeid = requestAnimationFrame(update);
-      return () => cancelAnimationFrame(Timeid);
+  const HrMinSec = (time) => {
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor((time % 3600) / 60);
+    let seconds = Math.floor(time % 60);
+    return `${hours}:${minutes}:${seconds}`;
+  };
+  const MinSec = (time) => {
+    if (time === 0) {
+      return "0:00";
     } else {
-      cancelAnimationFrame(Timeid);
+      let minutes = Math.floor(time / 60);
+      let seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds}`;
     }
-  }, [isplaying, isseeking]);
+  };
 
-  if (!surahslist || !active) {
-    return null;
-  } else {
+  const url = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${
+    active + 1
+  }.mp3`;
+
+  if (active && surahslist) {
     return (
-      <div className="w-5/6 h-32 bg-red-700 rounded-t-xl flex flex-col justify-start items-center ">
-        <hr className="w-20 h-1 bg-white mt-1" />
-        <div className="w-11/12 flex flex-row justify-between items-center ">
-          <h1 className="text-xl font-bold">{surahslist[active - 1].name}</h1>
-        </div>
-        <div className="w-11/12 flex justify-center items-center ">
-          {Math.floor(seek / 60)}:{Math.floor(seek % 60)}
-          <input
-            type="range"
-            min={0}
-            max={duration}
-            value={seek}
-            onChange={(e) => handleseek(e)}
-          />
-          {Math.floor(duration / 60)}:{Math.floor(duration % 60)}
-        </div>
-        <div className="w-11/12 h-max  flex lfex-row justify-between items-center">
-          {shuffle ? (
-            <MdShuffleOn size="30" onClick={() => setshuffle(false)} />
-          ) : (
-            <MdShuffle size="30" onClick={() => setshuffle(true)} />
-          )}
-          <div className="flex flex-row ">
-            <MdArrowBack
-              size="30"
-              onClick={() =>
-                active > 1
-                  ? setactive(() => active - 1)
-                  : setactive(() => surahslist.length)
-              }
-            />
-            {isplaying ? (
-              <MdPauseCircle size="30" onClick={() => setisplaying(false)} />
-            ) : (
-              <MdPlayArrow size="30" onClick={() => setisplaying(() => true)} />
-            )}
-            <MdArrowForward
-              size="30"
-              onClick={() =>
-                active < surahslist.length
-                  ? setactive(() => active + 1)
-                  : setactive(() => 1)
-              }
-            />
+      <ChakraProvider>
+        <div className="w-11/12 bg-black h-36  flex flex-col justify-start items-center">
+          <hr className="w-20 h-1 bg-white rounded-xl" />
+          <div className="w-11/12 flex flex-row justify-between items-center">
+            {surahslist ? <h1>{surahslist[active - 1].name}</h1> : null}
+            <p>X</p>
+          </div>
+          <div className="w-full flex flex-col justify-center items-center">
+            <RangeSlider
+              aria-label={["min", "max"]}
+              width="80%"
+              max={duration}
+              onChange={(e) => handleseek(e)}
+              value={[seek]}
+              onChangeStart={() => setseeking(true)}
+              onChangeEnd={() => setseeking(false)}
+            >
+              <RangeSliderTrack bg="red.100">
+                <RangeSliderFilledTrack />
+              </RangeSliderTrack>
+              <RangeSliderThumb boxSize={3} index={0}></RangeSliderThumb>
+            </RangeSlider>
+            <div className="w-4/5 flex flex-row justify-between items-between">
+              {seek > 3600 ? <p>{HrMinSec(seek)}</p> : <p>{MinSec(seek)}</p>}
+              {duration > 3600 ? (
+                <p>{HrMinSec(duration)}</p>
+              ) : (
+                <p>{MinSec(duration)}</p>
+              )}
+            </div>
           </div>
 
-          {repeat ? (
-            <MdRepeatOne size="30" onClick={() => setrepeat(false)} />
-          ) : (
-            <MdRepeat size="30" onClick={() => setrepeat(true)} />
-          )}
-        </div>
+          <div className="w-4/5 flex flex-row justify-between items-center ">
+            {repeat ? (
+              <MdRepeatOne size="30" onClick={() => setrepeat(false)} />
+            ) : (
+              <MdRepeat size="30" onClick={() => setrepeat(true)} />
+            )}
+            <div className="flex flex-row justify-center items-center gap-2 ">
+              <MdSkipPrevious
+                size="40"
+                onClick={() =>
+                  active <= 1
+                    ? setactive(surahslist.length)
+                    : setactive(() => active - 1)
+                }
+              />
+              {playing ? (
+                <MdPauseCircleFilled
+                  size="40"
+                  onClick={() => setplaying(false)}
+                />
+              ) : (
+                <MdPlayCircleFilled
+                  size="40"
+                  onClick={() => setplaying(true)}
+                />
+              )}
+              <MdSkipNext
+                size="40"
+                onClick={() =>
+                  active >= surahslist.length
+                    ? setactive(0)
+                    : setactive(() => active + 1)
+                }
+              />
+            </div>
+            {shuffle ? (
+              <MdShuffle size="30" onClick={() => setshuffle(false)} />
+            ) : (
+              <MdShuffle
+                size="30"
+                opacity={0.5}
+                onClick={() => setshuffle(true)}
+              />
+            )}
+          </div>
 
-        <ReactHowler
-          ref={soundRef}
-          src={url}
-          playing={isplaying}
-          html5={true}
-          format={["mp3", ".mp3"]}
-          volume={0.1}
-          loop={repeat}
-          onEnd={() =>
-            repeat ? setactive(() => active) : setactive(active + 1)
-          }
-          onLoad={() => setduration(soundRef.current.duration())}
-        />
+          <ReactHowler
+            ref={SoundRef}
+            src={url}
+            format={["mp3", ".mp3"]}
+            playing={playing}
+            volume={0.1}
+            onLoad={() => setduration(SoundRef.current.duration())}
+            html5={true}
+            preload={true}
+          />
+        </div>
+      </ChakraProvider>
+    );
+  } else {
+    return (
+      <div className="flex flex-row gap-4 justify-center items-center">
+        <h1>Click Any SUrah To Start Play</h1>
+        <MdHeadphones size="40" />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import Side from "../Components/Side";
 import Player from "../Components/Player";
 import { PlayerProvider } from "../context/PlayerContext";
+
 const Layout = ({ children }) => {
   return (
     <PlayerProvider>

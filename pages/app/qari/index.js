@@ -1,17 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 import Qaricard from "../../../Components/Qaricard";
-const Index = () => {
-  const query = useQuery(["/app"], () => {
-    return fetch("/api/qari").then((res) => res.json());
-  });
-  const { data, isLoading, isError } = query;
-  if (isLoading) {
-    return <Loader />;
-  }
-  if (isError) {
-    return <div>Something went wrong</div>;
-  }
+import Error from "../../../Components/Error";
+import { loadQari } from "../../../lib/loadqari";
+
+export async function getStaticProps() {
+  const data = await loadQari();
+  return {
+    props: {
+      data,
+    },
+  };
+}
+const Index = ({ data }) => {
   if (data[0]) {
     return (
       <div className="w-full h-full flex flex-row justify-center items-center overflow-scroll gap-4">
@@ -28,6 +27,8 @@ const Index = () => {
         })}
       </div>
     );
+  } else {
+    return <Error />;
   }
 };
 export default Index;

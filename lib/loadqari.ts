@@ -1,39 +1,37 @@
 import prisma from "./prisma";
-export async function loadQari() {
-  // try {
-  //   const res = await fetch("http://localhost:3000/api/qaris", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(1),
-  //   });
-  //   const data = await res.json();
-  //   return data;
-  // } catch (error) {
-  //   console.log(error);
-  // }
+export async function loadQari(id) {
   try {
     let data;
-    await prisma.qari
-      .findUnique({
-        where: {
-          id: Number(1),
-        },
-      })
-      .then((qari) => {
-        if (qari) {
-          console.log(qari);
+    if (id) {
+      await prisma.qari
+        .findUnique({
+          where: {
+            id: Number(id),
+          },
+        })
+        .then((qari) => {
           data = qari;
-        } else {
-          console.log("error");
-        }
-      })
-      .catch((err) => {
-        console.log("error on the prisma layer");
-      });
-    return data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      await prisma.qari
+        .findMany()
+        .then((qari) => {
+          if (qari) {
+            data = qari;
+          } else {
+            console.log("error");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    return data || null;
   } catch (error) {
-    console.log(error);
+    console.log("there was an error");
   }
 }

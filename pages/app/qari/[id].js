@@ -3,10 +3,21 @@ import Usernav from "../../../Components/Usernav";
 import Surahstable from "../../../Components/Surahstable";
 import { loadQari } from "../../../lib/loadqari";
 import { loadSurahs } from "../../../lib/loadsurahs";
+import Error from "../../../Components/Error";
 
-export async function getServerSideProps() {
+// pre-rendering for static generation on Dynamic Routes
+export async function getStaticPaths() {
   const qari = await loadQari();
-  const surahs = await loadSurahs();
+  const paths = qari.map((qari) => ({
+    params: { id: qari.id.toString() },
+  }));
+
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }) {
+  const qari = await loadQari(params.id);
+  const surahs = await loadSurahs(params.id);
   return {
     props: {
       qari,
@@ -14,12 +25,21 @@ export async function getServerSideProps() {
     },
   };
 }
+
 const Qari = ({ qari, surahs }) => {
-  return (
-    <div className="w-full h-full flex flex-col justify-start items-center">
-      <Usernav name={qari.name} country={qari.country} imageurl={qari.image} />
-      <Surahstable surahs={surahs} />
-    </div>
-  );
+  if (qari && surahs) {
+    return (
+      <div className="w-full h-full flex flex-col justify-start items-center">
+        <Usernav
+          name={qari.name}
+          country={qari.country}
+          imageurl={qari.image}
+        />
+        <Surahstable surahs={surahs} />
+      </div>
+    );
+  } else {
+    return <Error />;
+  }
 };
 export default Qari;

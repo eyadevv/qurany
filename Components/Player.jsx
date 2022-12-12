@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MdHeadphones } from "react-icons/md";
+import { MdHeadphones, MdClear } from "react-icons/md";
 
 import { PlayerContext } from "../context/PlayerContext";
 import AudioPlayer from "react-h5-audio-player";
@@ -17,7 +17,7 @@ const Player = () => {
         <hr className="w-20 h-1 bg-white rounded-xl" />
         <div className="w-11/12 flex flex-row justify-between items-center">
           {surahslist ? <h1>{surahslist[active - 1].name}</h1> : null}
-          <p>X</p>
+          <MdClear onClick={() => setactive(false)} />
         </div>
         <AudioPlayer
           src={url}

@@ -4,12 +4,13 @@ import { MdHeadphones, MdClear } from "react-icons/md";
 import { PlayerContext } from "../context/PlayerContext";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
+import { useRouter } from "next/router";
 const Player = () => {
+  const qari = useRouter().query.id;
   const { active, setactive, surahslist } = useContext(PlayerContext);
-
-  const url = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${
-    active + 1
-  }.mp3`;
+  console.log(qari);
+  console.log(active);
+  const url = `/api/stream/${qari}-${active}`;
 
   if (active && surahslist) {
     return (
@@ -21,7 +22,6 @@ const Player = () => {
         </div>
         <AudioPlayer
           src={url}
-          onPlay={() => console.log("onPlay")}
           layout="stacked"
           onClickNext={() => {
             if (active < surahslist.length) {

@@ -1,19 +1,19 @@
-import Qaricard from "../../../Components/Qaricard";
-import Error from "../../../Components/Error";
-import { loadQari } from "../../../lib/loadqari";
+import Qaricard from "../../../Components/Qaricard"
+import Error from "../../../Components/Error"
+import { loadQari } from "../../../lib/loadqari"
 
 export async function getStaticProps() {
-  const data = await loadQari();
+  const data = await loadQari()
   return {
     props: {
       data,
     },
-  };
+  }
 }
 const Index = ({ data }) => {
-  if (data[0]) {
+  if (data) {
     return (
-      <div className="w-full h-full flex flex-row justify-center items-center overflow-scroll gap-4">
+      <div className="w-full h-full flex flex-row justify-center flex-wrap items-center  gap-4">
         {data.map((qari, id) => {
           return (
             <Qaricard
@@ -23,12 +23,12 @@ const Index = ({ data }) => {
               image={qari.image}
               country={qari.country}
             />
-          );
+          )
         })}
       </div>
-    );
+    )
   } else {
-    return <Error />;
+    return <Error />
   }
-};
-export default Index;
+}
+export default Index

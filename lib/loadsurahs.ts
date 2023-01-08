@@ -1,13 +1,9 @@
 import prisma from "./prisma";
-export async function loadSurahs(qariId) {
+export async function loadSurahs() {
   try {
     let data;
     await prisma.surah
-      .findMany({
-        where: {
-          qariId: Number(qariId),
-        },
-      })
+      .findMany()
       .then((surahs) => {
         data = surahs;
       })

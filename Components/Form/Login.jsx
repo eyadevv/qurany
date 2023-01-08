@@ -1,54 +1,20 @@
-import { TextField, CircularProgress } from "@mui/material";
-import { useState } from "react";
-import { Poster } from "../../lib/loader";
-import { useRouter } from "next/router";
-const Login = ({ setmode }) => {
-  const [password, setpassword] = useState(null);
-  const [email, setemail] = useState(null);
-  const [passerror, setpasserror] = useState(false);
-  const [isloading, setisloading] = useState(false);
-  const [redirect, setredirect] = useState(false);
-  const [msg, setmsg] = useState(null);
-  const handlePass = (pass) => {
-    if (pass.length <= 8) {
-      setpasserror(true);
-    } else {
-      setpasserror(false);
-      setpassword(pass);
-    }
-  };
-  const data = { email, password };
-  redirect ? useRouter().push("/app") : null;
-
+import formauth from "../../lib/formauth";
+import { TextField } from "@mui/material";
+const Login = ({ data }) => {
+  const { email, setemail, pass, setpass } = data;
   return (
-    <section className="flex flex-col gap-4 items-center">
-      <h1>Welcome back</h1>
+    <section className="flex flex-col gap-3">
       <TextField
-        id="outlined-basic"
-        label="Email or Username"
-        variant="outlined"
         focused
-        type="email"
+        label="username or email"
         onChange={(e) => setemail(e.target.value)}
       />
       <TextField
-        id="outlined-basic"
-        label="password"
-        variant="outlined"
         focused
-        type="password"
-        error={passerror}
-        onChange={(e) => handlePass(e.target.value)}
-        helperText={passerror ? "Password must be 8 characters long" : ""}
+        label="password"
+        onChange={(e) => setpass(e.target.value)}
       />
-      <button onClick={() => Poster("login", data, setisloading, setredirect , setmsg)}>
-        Login
-      </button>
-      <button onClick={() => setmode("Register")}>
-        Don't have an account?
-      </button>
-      {isloading ? <CircularProgress /> : null}
-      {msg}
+      <button onClick={() => formauth("login", { email, pass })}>Submit</button>
     </section>
   );
 };

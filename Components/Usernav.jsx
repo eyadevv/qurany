@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image from "next/image"
+import Error from "./Error"
 const Usernav = ({ imageurl, name, country }) => {
   if (imageurl && name && country) {
     return (
@@ -6,12 +7,12 @@ const Usernav = ({ imageurl, name, country }) => {
         {imageurl ? (
           <Image src={imageurl} alt={name} width="150" height="150" />
         ) : null}
-        <h1 className="text-2xl font-bold">{name}</h1>
+        <h2 className="text-2xl font-bold">{name}</h2>
         <h2>{country}</h2>
       </div>
-    );
+    )
   } else {
-    return <h1>error loading qari</h1>;
+    return <Error />
   }
-};
-export default Usernav;
+}
+export default Usernav

@@ -11,8 +11,6 @@ export default async function handle(
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   } else {
-    console.log(req.body);
-
     const { email, password } = req.body;
     const USER = await prisma.user.findUnique({
       where: {

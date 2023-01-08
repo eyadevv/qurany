@@ -1,29 +1,32 @@
-import { useRouter } from "next/router";
-import Usernav from "../../../Components/Usernav";
-import Surahstable from "../../../Components/Surahstable";
-import { loadQari } from "../../../lib/loadqari";
-import { loadSurahs } from "../../../lib/loadsurahs";
-import Error from "../../../Components/Error";
+import Usernav from "../../../Components/Usernav"
+import Surahstable from "../../../Components/Surahstable"
+import { loadQari } from "../../../lib/loadqari"
+import { loadSurahs } from "../../../lib/loadsurahs"
+import Error from "../../../Components/Error"
 
-// pre-rendering for static generation on Dynamic Routes
 export async function getStaticPaths() {
-  const qari = await loadQari();
-  const paths = qari.map((qari) => ({
-    params: { id: qari.id.toString() },
-  }));
+  const qari = await loadQari()
+  let paths
+  if (qari) {
+    paths = qari.map((qari) => ({
+      params: { id: qari.id.toString() },
+    }))
+  } else {
+    paths = []
+  }
 
-  return { paths, fallback: true };
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({ params }) {
-  const qari = await loadQari(params.id);
-  const surahs = await loadSurahs(params.id);
+  const qari = await loadQari(params.id)
+  const surahs = await loadSurahs(params.id)
   return {
     props: {
       qari,
       surahs,
     },
-  };
+  }
 }
 
 const Qari = ({ qari, surahs }) => {
@@ -37,9 +40,9 @@ const Qari = ({ qari, surahs }) => {
         />
         <Surahstable surahs={surahs} />
       </div>
-    );
+    )
   } else {
-    return <Error />;
+    return <Error />
   }
-};
-export default Qari;
+}
+export default Qari

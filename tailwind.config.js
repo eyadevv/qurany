@@ -5,6 +5,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./Components/**/*.{js,ts,jsx,tsx}",
     "./Layout/Layout.jsx",
+    "./styles/globals.css",
   ],
   theme: {
     extend: {
@@ -14,4 +15,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

@@ -1,23 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 const Qaricard = ({ image, name, country, id }) => {
   return (
     <Link
-      className="w-max h-56  flex flex-col justify-between items-center p-4"
+      className="w-60 h-60  text-center flex flex-col justify-start items-center gap-2"
       href={`/app/qari/${id}`}
     >
       <Image
         src={image}
         alt={name}
-        width="160"
-        height="160"
-        className="rounded-full"
+        width={200}
+        height={200}
+        className="rounded-full w-32 h-32"
       />
       <div>
-        <h1>{name}</h1>
-        <h2>{country}</h2>
+        <h3 className="font-bold">{name}</h3>
+        <p>{country}</p>
       </div>
     </Link>
-  );
-};
-export default Qaricard;
+  )
+}
+export default Qaricard

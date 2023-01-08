@@ -1,7 +1,7 @@
 const App = () => {
   return (
     <main className="w-full h-full flex justify-center items-center">
-      <h1>Welcome to the feed</h1>
+      <h2>Welcome to the feed</h2>
     </main>
   );
 };

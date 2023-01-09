@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   const [showplayer, setshowplayer] = useState(false)
   return (
     <PlayerProvider>
-      <main className="w-screen h-screen flex flex-row">
+      <main className="w-screen h-screen flex flex-row phone:flex-col ">
         <Side />
         <section className="w-full h-full flex flex-col justify-between items-center bg-gradient-to-b from-red-600 to-black">
           <div className="w-full h-full overflow-auto">{children}</div>

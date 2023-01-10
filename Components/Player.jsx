@@ -12,7 +12,7 @@ const Player = ({ state }) => {
 
   if (active && surahslist) {
     return (
-      <div className="w-11/12 bg-black h-36  flex flex-col justify-start items-center rounded-t-xl">
+      <div className="w-11/12 bg-black h-36  flex flex-col justify-start items-center rounded-t-xl flex-shrink-0">
         <hr className="w-20 h-1 bg-white rounded-xl" />
         <div className="w-11/12 flex flex-row justify-between items-center">
           {surahslist ? <p>{surahslist[active - 1].name}</p> : null}

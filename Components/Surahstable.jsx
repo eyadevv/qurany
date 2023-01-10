@@ -8,12 +8,13 @@ const Surahstable = ({ surahs }) => {
   }, [])
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full flex-shrink ">
       <Table
         sx={{
           color: "white",
           backgroundColor: "transparent",
           width: "100%",
+          height: "max-content",
         }}
       >
         <TableHead>

@@ -17,7 +17,7 @@ const Item = ({ content, route, icon }) => {
 }
 const Side = () => {
   return (
-    <section className="w-44 h-screen gap-4 bg-black flex flex-col justify-start items-center font-bold pt-8  phone:flex-row phone:w-full phone:h-24 phone:justify-center phone:p-0 phone:gap-0">
+    <side className="w-44 h-screen gap-4 bg-black flex flex-col justify-start items-center font-bold pt-8  phone:flex-row phone:w-full phone:h-24 phone:justify-center phone:p-0 phone:gap-0 flex-shrink-0">
       <Link href="/app/">
         <h2 className="phone:hidden">Quranly</h2>
       </Link>
@@ -31,7 +31,7 @@ const Side = () => {
         <Item content="Board" route="/app/board" icon={<MdLeaderboard />} />
         <Item content="Qari" route="/app/qari" icon={<AiOutlineUser />} />
       </div>
-    </section>
+    </side>
   )
 }
 export default Side

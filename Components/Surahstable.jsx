@@ -1,24 +1,19 @@
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Table,
-} from "@mui/material";
-import { useContext, useEffect } from "react";
-import { PlayerContext } from "../context/PlayerContext";
+import { TableBody, TableCell, TableHead, TableRow, Table } from "@mui/material"
+import { useContext, useEffect } from "react"
+import { PlayerContext } from "../context/PlayerContext"
 const Surahstable = ({ surahs }) => {
-  const { setactive, setsurahslist } = useContext(PlayerContext);
+  const { setactive, setsurahslist } = useContext(PlayerContext)
   useEffect(() => {
-    setsurahslist(() => surahs);
-  }, []);
+    setsurahslist(() => surahs)
+  }, [])
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       <Table
         sx={{
           color: "white",
           backgroundColor: "transparent",
+          width: "100%",
         }}
       >
         <TableHead>
@@ -27,12 +22,11 @@ const Surahstable = ({ surahs }) => {
             <TableCell sx={{ color: "white" }}>Name</TableCell>
             <TableCell sx={{ color: "white" }}>ArabicName</TableCell>
             <TableCell sx={{ color: "white" }}>Ayahs</TableCell>
-            <TableCell sx={{ color: "white" }}>Type</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {surahs.map((surah, key) => {
-            const { id, name, ayahs, place, arabicName } = surah;
+            const { id, name, ayahs, arabicName } = surah
             return (
               <TableRow key={key} onClick={() => setactive(() => id)}>
                 <TableCell sx={{ color: "white", border: "none" }}>
@@ -49,15 +43,12 @@ const Surahstable = ({ surahs }) => {
                 <TableCell sx={{ color: "white", border: "none" }}>
                   {ayahs}
                 </TableCell>
-                <TableCell sx={{ color: "white", border: "none" }}>
-                  {place}
-                </TableCell>
               </TableRow>
-            );
+            )
           })}
         </TableBody>
       </Table>
     </div>
-  );
-};
-export default Surahstable;
+  )
+}
+export default Surahstable

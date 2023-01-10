@@ -32,7 +32,7 @@ export async function getStaticProps({ params }) {
 const Qari = ({ qari, surahs }) => {
   if (qari && surahs) {
     return (
-      <div className="w-full h-full flex flex-col justify-start items-center">
+      <div className="w-full h-[70vh] flex flex-col justify-start items-center">
         <Usernav
           name={qari.name}
           country={qari.country}

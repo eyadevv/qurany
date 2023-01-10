@@ -15,7 +15,7 @@ const Player = ({ state }) => {
       <div className="w-11/12 bg-black h-36  flex flex-col justify-start items-center rounded-t-xl">
         <hr className="w-20 h-1 bg-white rounded-xl" />
         <div className="w-11/12 flex flex-row justify-between items-center">
-          {surahslist ? <h1>{surahslist[active - 1].name}</h1> : null}
+          {surahslist ? <p>{surahslist[active - 1].name}</p> : null}
           <MdClear onClick={() => setactive(false)} />
         </div>
         <AudioPlayer

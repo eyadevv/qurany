@@ -3,7 +3,7 @@ import Player from "../Components/Player"
 import { PlayerProvider } from "../context/PlayerContext"
 import { useState } from "react"
 const Layout = ({ children }) => {
-  const [showplayer, setshowplayer] = useState(true)
+  const [showplayer, setshowplayer] = useState(false)
   return (
     <PlayerProvider>
       <main className="w-screen h-screen justify-between flex flex-row phone:flex-col ">

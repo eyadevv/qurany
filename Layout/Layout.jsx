@@ -8,8 +8,10 @@ const Layout = ({ children }) => {
     <PlayerProvider>
       <main className="w-screen h-screen justify-between flex flex-row phone:flex-col ">
         <Side />
-        <section className="w-full h-full flex flex-col justify-between items-center bg-gradient-to-b from-red-600 to-black">
-          <div className="w-full h-full overflow-auto">{children}</div>
+        <section className="w-full h-full flex flex-col justify-between items-center bg-gradient-to-b from-red-600 to-black phone:overflow-clip">
+          <div className="w-full h-full overflow-auto phone:flex-shrink">
+            {children}
+          </div>
           <Player state={showplayer} />
         </section>
       </main>

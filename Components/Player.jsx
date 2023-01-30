@@ -44,7 +44,7 @@ const Player = ({ state }) => {
   } else if (state) {
     return (
       <div className="flex flex-row gap-4 justify-center items-center">
-        <h3>Click Any SUrah To Start Play</h3>
+        <h3>Click Any Surah To Start Play</h3>
         <MdHeadphones size="40" />
       </div>
     )

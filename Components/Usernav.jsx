@@ -1,9 +1,9 @@
 import Image from "next/image"
 import Error from "./Error"
 const Usernav = ({ imageurl, name, country }) => {
-  if (imageurl && name && country) {
+  if (name && country) {
     return (
-      <div className="w-full h-max flex flex-row justify-start items-center p-4 gap-2">
+      <div className="w-full h-max flex flex-row justify-start items-center p-4 gap-2 bg-blue-900">
         {imageurl ? (
           <Image src={imageurl} alt={name} width="150" height="150" />
         ) : null}

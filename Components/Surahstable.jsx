@@ -8,13 +8,13 @@ const Surahstable = ({ surahs }) => {
   }, [])
 
   return (
-    <div className="w-full h-max flex flex-shrink overflow-scroll">
+    <div className="w-full h-[40vh] flex justify-center items-center flex-shrink overflow-scroll bg-yellow-900 ">
       <Table
         sx={{
           color: "white",
           backgroundColor: "transparent",
           width: "100%",
-          height: "max-content",
+          height: "100%",
           flexShrink: "inherit",
           overflow: "scroll",
         }}

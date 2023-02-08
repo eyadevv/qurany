@@ -28,21 +28,76 @@ export async function getStaticProps({ params }) {
     },
   }
 }
-
-const Qari = ({ qari, surahs }) => {
-  if (qari && surahs) {
-    return (
-      <div className="w-full h-max flex flex-col justify-start items-center overflow-scroll">
-        <Usernav
-          name={qari.name}
-          country={qari.country}
-          imageurl={qari.image}
-        />
-        <Surahstable surahs={surahs} />
-      </div>
-    )
-  } else {
-    return <Error />
+// { qari, surahs }
+const Qari = () => {
+  // if (qari && surahs) {
+  const qari = {
+    name: "islam subhi",
+    country: "Egypt",
+    imageurl: null,
   }
+  const surahs = [
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+    {
+      id: 1,
+      name: "alfatiha",
+      ayahs: "7",
+      arabicName: "الفاتحة",
+    },
+  ]
+  return (
+    <div className="w-full h-max flex flex-col justify-start items-center overflow-scroll">
+      <Usernav
+        name={qari.name}
+        country={qari.country}
+        imageurl={qari.imageurl}
+      />
+      <Surahstable surahs={surahs} />
+    </div>
+  )
+  // } else {
+  //   return <Error />
+  // }
 }
 export default Qari

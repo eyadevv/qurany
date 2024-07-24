@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+---
 
-## Getting Started
+# Qurany - High-Quality Quran Streaming 🎧📖
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Introduction
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Qurany is a website that allows users to stream high-quality Quran recitations. It offers an easy-to-use interface to listen to and explore the Quran. Whether you are at home or on the go, Qurany provides seamless access to the beautiful recitations of the Quran.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **🎵 High-Quality Streaming:** Enjoy high-quality audio streaming of Quran recitations.
+- **🖥️ User-friendly Interface:** Simple and intuitive interface for easy navigation.
+- **🎙️ Multiple Reciters:** Choose from a variety of renowned reciters.
+- **🔍 Search Functionality:** Quickly find specific Surahs or Ayahs.
+- **📋 Playlist Creation:** Create and manage your own playlists of favorite recitations.
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+To run Qurany locally, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/eyadevv/qurany.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd qurany
+    ```
+3. Install the dependencies:
+    ```sh
+    npm install
+    ```
+4. Start the application:
+    ```sh
+    npm start
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+We welcome contributions from the community! If you'd like to contribute, please follow these steps:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository.
+2. Create a new branch:
+    ```sh
+    git checkout -b feature/your-feature-name
+    ```
+3. Make your changes and commit them:
+    ```sh
+    git commit -m 'Add some feature'
+    ```
+4. Push to the branch:
+    ```sh
+    git push origin feature/your-feature-name
+    ```
+5. Open a pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Please ensure your code adheres to our coding standards and includes tests where applicable.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+---

@@ -1,5 +1,3 @@
----
-
 # Qurany - High-Quality Quran Streaming 🎧📖
 
 ## Table of Contents
